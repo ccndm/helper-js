@@ -2,15 +2,15 @@ const u = navigator.userAgent;
 
 export const isAndroid = function () {
     return u.indexOf('Android') > -1 || u.indexOf('Adr') > -1;
-}
+};
 
 export const isIOS = function () {
     return !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
-}
+};
 
 export const isWeiXin = function () {
     return u.indexOf('MicroMessenger') > -1;
-}
+};
 
 /**
  * 移动端初始化
@@ -60,7 +60,7 @@ export const mobileInit = function () {
         if ((bodyHeight - window.document.body.offsetHeight) > 49)
             window.document.body.style.height = bodyHeight + 'px';
     }
-}
+};
 
 export default {
     isAndroid,

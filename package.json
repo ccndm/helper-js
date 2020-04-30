@@ -1,6 +1,6 @@
 {
-  "name": "@defy/helper-js",
-  "version": "0.0.7",
+  "name": "@ccn-dm/helper-js",
+  "version": "0.0.1",
   "description": "",
   "main": "dist/helper-js.common.js",
   "module": "dist/helper-js.esm.js",
@@ -9,16 +9,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Defypro/helper-js.git"
+    "url": "git+https://github.com/ccndm/helper-js.git"
   },
   "keywords": [
   ],
   "author": "Defy",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Defypro/helper-js/issues"
+    "url": "https://github.com/ccndm/helper-js/issues"
   },
-  "homepage": "https://github.com/Defypro/helper-js#readme",
+  "homepage": "https://github.com/ccndm/helper-js#readme",
   "devDependencies": {
     "@babel/core": "^7.4.5",
     "@babel/plugin-external-helpers": "^7.2.0",

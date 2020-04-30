@@ -19,7 +19,7 @@ export const getParams = function (key) {
  */
 export const getHash = function () {
     return (location.search || "").replace("#", '');
-}
+};
 
 /**
  * 获取URL
@@ -35,7 +35,7 @@ export const getUrl = function (params = {}) {
         query = '?' + query.substr(0, query.length - 1);
     }
     return location.href.replace(location.search, '').replace(location.hash, '') + query;
-}
+};
 
 
 

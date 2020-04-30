@@ -28,6 +28,7 @@ export default {
     plugins: [
         buble(),
         babel({
+            runtimeHelpers: true,
             exclude: 'node_modules/**'
         })
     ]

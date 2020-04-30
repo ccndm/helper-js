@@ -1,5 +1,5 @@
 /**
- * helper-js v0.0.7
+ * helper-js v0.0.1
  * https://github.com/defypro/helper-js
  * @license MIT
  */
@@ -59,6 +59,8 @@
     };
 
     function _typeof(obj) {
+      "@babel/helpers - typeof";
+
       if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
         _typeof = function (obj) {
           return typeof obj;
