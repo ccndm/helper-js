@@ -149,9 +149,137 @@
       mobileInit: mobileInit
     };
 
+    var _storage = window.localStorage;
+
+    var cache = function cache() {};
+
+    cache.prototype.setItem = function (k, v, t) {
+      var seconds = parseInt(t);
+      var expire = 0;
+
+      if (seconds > 0) {
+        expire = new Date().getTime() + seconds * 1000;
+      }
+
+      _storage.setItem(k, JSON.stringify({
+        value: v,
+        expire: expire
+      }));
+    };
+
+    cache.prototype.getItem = function (k, _default) {
+      if (_default === void 0) _default = null;
+      var time = new Date().getTime();
+
+      var valueItem = _storage.getItem(k);
+
+      if (!valueItem) {
+        return _default;
+      }
+
+      var ref = JSON.parse(valueItem);
+      var value = ref.value;
+      var expire = ref.expire;
+
+      if (expire === 0 || expire > time) {
+        return value || _default;
+      }
+
+      _storage.removeItem(k);
+
+      return _default;
+    };
+
+    cache.prototype.removeItem = function (k) {
+      _storage.removeItem(k);
+    };
+
+    var cache$1 = new cache();
+
+    var validate = {
+      required: function required(value) {
+        var this$1 = this;
+
+        if (value === undefined || value === null) {
+          return false;
+        }
+
+        if (Array.isArray(value)) {
+          return value.length > 0 && value.every(function (val) {
+            return this$1.required(val);
+          });
+        }
+
+        return !!String(value).trim().length;
+      },
+      max: function max(value, length) {
+        if (value === undefined || value === null) {
+          return length >= 0;
+        }
+
+        if (Array.isArray(value)) {
+          return value.length <= length;
+        }
+
+        return String(value).length <= length;
+      },
+      min: function min(value, length) {
+        if (value === undefined || value === null) {
+          return length >= 0;
+        }
+
+        if (Array.isArray(value)) {
+          return value.length >= length;
+        }
+
+        return String(value).length >= length;
+      },
+      minValue: function minValue(value, min) {
+        var this$1 = this;
+
+        if (value === null || value === undefined || value === '') {
+          return false;
+        }
+
+        if (Array.isArray(value)) {
+          return value.length > 0 && value.every(function (val) {
+            return this$1.minValue(val, min);
+          });
+        }
+
+        return Number(value) >= min;
+      },
+      maxValue: function maxValue(value, max) {
+        var this$1 = this;
+
+        if (value === null || value === undefined || value === '') {
+          return false;
+        }
+
+        if (Array.isArray(value)) {
+          return value.length > 0 && value.every(function (val) {
+            return this$1.maxValue(val, max);
+          });
+        }
+
+        return Number(value) <= max;
+      },
+      numeric: function numeric(value) {
+        return /^[0-9]+$/.test(String(value));
+      },
+      exactLength: function exactLength(value, length) {
+        return String(value).length === length;
+      },
+      mobilePhone: function mobilePhone(value) {
+        return this.required(value) && this.numeric(value) && this.exactLength(value, 11);
+      }
+    };
+
     var index = {
       url: url,
-      platform: platform
+      platform: platform,
+      cache: cache$1,
+      validate: validate
     };
 
     return index;

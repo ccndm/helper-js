@@ -38,3 +38,43 @@ JS助手库
     //3.修正安卓浏览器键盘弹出导致页面高度变化问题
     platform.mobileInit();
 ```
+
+> cache
+```javascript
+    const {cache} = require('helper-js');
+
+    cache.setItem('键名','键值','过期秒数');
+    
+    cache.getItem('键名');
+    
+    cache.removeItem('键名');
+```
+
+> validate
+```javascript
+    const {validate} = require('helper-js');
+
+    //是否为空，用于判断必填
+    validate.required(value);
+    
+    //最大长度
+    validate.max(value, length);
+    
+    //最小长度
+    validate.min(value, length);
+    
+    //最小值
+    validate.minValue(value, min);
+    
+    //最大值
+    validate.maxValue(value, max);
+    
+    //是否数值
+    validate.numeric(value);
+    
+    //长度是否相等
+    validate.exactLength(value, length);
+    
+    //是否手机号
+    validate.mobilePhone('手机号');
+```
