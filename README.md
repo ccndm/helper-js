@@ -78,3 +78,27 @@ JS助手库
     //是否手机号
     validate.mobilePhone('手机号');
 ```
+
+> date 
+
+|  Format   | Description  |
+|  ----     |   ----       |
+|  YY       |  两位数的年份 |
+|  YYYY       |  四位数的年份 |
+|  M       |  月份，从 1 开始 |
+|  MM       |  月份，两位数（补0） |
+|  D       |  月份里的一天 |
+|  DD       |  月份里的一天，两位数（补0） |
+|  H       |  24小时 |
+|  HH       |  24小时(补0) |
+|  h       |  12小时 |
+|  hh       |  12小时(补0) |
+|  m       |  分钟 |
+|  mm       |  分钟，两位数(补0) |
+|  s       |  秒 |
+|  ss       |  秒 两位数(补0) |
+
+```javascript
+    const {date} = require('helper-js');
+    date.format(new Date(), 'YY年M月D日');
+```

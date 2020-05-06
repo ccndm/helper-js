@@ -1,4 +1,4 @@
-function format(date, formatStr = 'YYYY-MM-DD HH:mm:ss') {
+export const format = (date, formatStr = 'YYYY-MM-DD HH:mm:ss') => {
     const _date = new Date(date);
     const _y = _date.getFullYear();
     const _M = _date.getMonth();
@@ -38,6 +38,8 @@ function format(date, formatStr = 'YYYY-MM-DD HH:mm:ss') {
     };
 
     return formatStr.replace(/\[([^\]]+)]|Y{2,4}|M{1,4}|D{1,2}|d{1,4}|H{1,2}|h{1,2}|a|A|m{1,2}|s{1,2}|Z{1,2}|SSS/g, (match, $1) => $1 || matches[match] || '');
-}
+};
 
-console.log(format(new Date(), 'hh:mm:ss'));
+export default {
+    format
+}
