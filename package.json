@@ -1,6 +1,6 @@
 {
   "name": "@ccn-dm/helper-js",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "",
   "main": "dist/helper-js.common.js",
   "module": "dist/helper-js.esm.js",
