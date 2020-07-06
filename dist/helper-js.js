@@ -1,13 +1,13 @@
 /**
- * helper-js v0.0.2
+ * helper-js v0.0.3
  * https://github.com/defypro/helper-js
  * @license MIT
  */
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-    (global.helperJS = factory());
-}(this, (function () { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
+    typeof define === 'function' && define.amd ? define(['exports'], factory) :
+    (factory((global.helperJS = {})));
+}(this, (function (exports) { 'use strict';
 
     /**
      * 返回URL参数对象
@@ -52,7 +52,7 @@
 
       return location.href.replace(location.search, '').replace(location.hash, '') + query;
     };
-    var url = {
+    var _url = {
       getParams: getParams,
       getHash: getHash,
       getUrl: getUrl
@@ -75,6 +75,9 @@
     }
 
     var u = navigator.userAgent;
+    var isWechatDevtools = function isWechatDevtools() {
+      return u.indexOf('wechatdevtools') > -1 || u.indexOf('Adr') > -1;
+    };
     var isAndroid = function isAndroid() {
       return u.indexOf('Android') > -1 || u.indexOf('Adr') > -1;
     };
@@ -142,11 +145,12 @@
         }
       };
     };
-    var platform = {
+    var _platform = {
       isAndroid: isAndroid,
       isIOS: isIOS,
       isWeiXin: isWeiXin,
-      mobileInit: mobileInit
+      mobileInit: mobileInit,
+      isWechatDevtools: isWechatDevtools
     };
 
     var _storage = window.localStorage;
@@ -194,7 +198,7 @@
       _storage.removeItem(k);
     };
 
-    var cache$1 = new cache();
+    var _cache = new cache();
 
     var validate = {
       required: function required(value) {
@@ -336,18 +340,30 @@
         return $1 || matches[match] || '';
       });
     };
-    var date = {
+    var _date = {
       format: format
     };
 
+    var url = _url;
+    var platform = _platform;
+    var cache$1 = _cache;
+    var validate$1 = validate;
+    var date = _date;
     var index = {
       url: url,
       platform: platform,
       cache: cache$1,
-      validate: validate,
+      validate: validate$1,
       date: date
     };
 
-    return index;
+    exports.url = url;
+    exports.platform = platform;
+    exports.cache = cache$1;
+    exports.validate = validate$1;
+    exports.date = date;
+    exports.default = index;
+
+    Object.defineProperty(exports, '__esModule', { value: true });
 
 })));

@@ -1,5 +1,5 @@
 /**
- * helper-js v0.0.2
+ * helper-js v0.0.3
  * https://github.com/defypro/helper-js
  * @license MIT
  */
@@ -46,7 +46,7 @@ var getUrl = function getUrl(params) {
 
   return location.href.replace(location.search, '').replace(location.hash, '') + query;
 };
-var url = {
+var _url = {
   getParams: getParams,
   getHash: getHash,
   getUrl: getUrl
@@ -69,6 +69,9 @@ function _typeof(obj) {
 }
 
 var u = navigator.userAgent;
+var isWechatDevtools = function isWechatDevtools() {
+  return u.indexOf('wechatdevtools') > -1 || u.indexOf('Adr') > -1;
+};
 var isAndroid = function isAndroid() {
   return u.indexOf('Android') > -1 || u.indexOf('Adr') > -1;
 };
@@ -136,11 +139,12 @@ var mobileInit = function mobileInit() {
     }
   };
 };
-var platform = {
+var _platform = {
   isAndroid: isAndroid,
   isIOS: isIOS,
   isWeiXin: isWeiXin,
-  mobileInit: mobileInit
+  mobileInit: mobileInit,
+  isWechatDevtools: isWechatDevtools
 };
 
 var _storage = window.localStorage;
@@ -188,7 +192,7 @@ cache.prototype.removeItem = function (k) {
   _storage.removeItem(k);
 };
 
-var cache$1 = new cache();
+var _cache = new cache();
 
 var validate = {
   required: function required(value) {
@@ -330,16 +334,22 @@ var format = function format(date, formatStr) {
     return $1 || matches[match] || '';
   });
 };
-var date = {
+var _date = {
   format: format
 };
 
+var url = _url;
+var platform = _platform;
+var cache$1 = _cache;
+var validate$1 = validate;
+var date = _date;
 var index = {
   url: url,
   platform: platform,
   cache: cache$1,
-  validate: validate,
+  validate: validate$1,
   date: date
 };
 
 export default index;
+export { url, platform, cache$1 as cache, validate$1 as validate, date };

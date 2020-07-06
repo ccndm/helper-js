@@ -1,5 +1,9 @@
 const u = navigator.userAgent;
 
+export const isWechatDevtools = function () {
+    return u.indexOf('wechatdevtools') > -1 || u.indexOf('Adr') > -1;
+};
+
 export const isAndroid = function () {
     return u.indexOf('Android') > -1 || u.indexOf('Adr') > -1;
 };
@@ -54,7 +58,7 @@ export const mobileInit = function () {
         }
     }, 100);
     window.onresize = function () {
-        if(window.history && window.history.length > 1 && isIOS() && isWeiXin()){
+        if (window.history && window.history.length > 1 && isIOS() && isWeiXin()) {
             bodyHeight -= 49;
         }
         if ((bodyHeight - window.document.body.offsetHeight) > 49)
@@ -66,5 +70,6 @@ export default {
     isAndroid,
     isIOS,
     isWeiXin,
-    mobileInit
+    mobileInit,
+    isWechatDevtools
 }
